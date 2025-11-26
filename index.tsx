@@ -5,11 +5,6 @@ import { createRoot } from 'react-dom/client';
 
 const IMAGES = {
   hero: "https://images.unsplash.com/photo-1511497584788-876760111969?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
-  result_relax: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-  result_hair: "https://images.unsplash.com/photo-1582095133179-bfd08e2fc6b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-  result_premium: "https://drive.google.com/file/d/1S8aQS6VERyw1KN0ubTjMGIw9wxWb5TGD/view?usp=drive_link",
-  result_scalp: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-  result_balance: "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
   footer_bg: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
   mechanism_bg: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
 };
@@ -96,46 +91,44 @@ type ResultType = {
   price: string;
   desc: string;
   reasons: string[];
-  imgKey: keyof typeof IMAGES;
-  isVideo?: boolean;
+  breakdown: string; // Added breakdown text
 };
 
 const RESULTS: Record<string, ResultType> = {
   relax: {
-    name: "森の深眠コース 90分",
+    name: "森の深眠90分コース",
     price: "詳細を見る",
-    desc: "自律神経を整え、脳疲労を解消する極上のハンドテクニック。深い眠りへ誘います。",
-    reasons: ["深いリラクゼーション効果", "自律神経の調整", "眼精疲労の解消"],
-    imgKey: "result_relax"
+    desc: "自律神経を整え、脳疲労を解消する極上のハンドテクニック。長い時間をかけて深い眠りへ誘うスタンダードかつ至高のコース。",
+    reasons: ["90分のロングコースで深部疲労へアプローチ", "自律神経の調整と眼精疲労解消", "トリートメント(TR)付きで髪の手触りも向上"],
+    breakdown: "診断10分・頭浸浴10分・水素洗髪&森スパ40分・LLLT5分・TR5分"
   },
   hair: {
-    name: "水素髪質改善 90分",
+    name: "ディープスリープ90",
     price: "詳細を見る",
-    desc: "悪玉活性酸素を除去し、髪内部の水分量を向上。うねりやパサつきを根本からケアします。",
-    reasons: ["水分量アップで潤う髪へ", "うねり・パサつきの根本改善", "エイジングケア効果"],
-    imgKey: "result_hair"
+    desc: "水素洗髪に加え、髪質改善メニューに重点を置いたコース。うねりやパサつきを根本からケアし、水分量を向上させます。",
+    reasons: ["髪質改善10分付きで潤う髪へ", "水素の力で悪玉活性酸素を除去", "エイジングケア効果大"],
+    breakdown: "診断10分・頭浸10分・水素洗髪スパ40分・LLLT5分・髪質改善10分"
   },
   scalp: {
-    name: "森の炭酸コース 60分",
+    name: "森の炭酸60分コース",
     price: "詳細を見る",
-    desc: "高濃度炭酸泉が毛穴の汚れを吸着・除去。血行を促進し、健康な髪が育つ土壌を整えます。",
-    reasons: ["毛穴の汚れを徹底除去", "血行促進で育毛効果", "頭皮のニオイ改善"],
-    imgKey: "result_scalp"
+    desc: "高濃度炭酸泉が毛穴の汚れを吸着・除去。血行を促進し、健康な髪が育つ土壌を短時間で効率よく整えます。",
+    reasons: ["毛穴の汚れを炭酸で徹底除去", "血行促進で育毛効果", "60分でスッキリ整う"],
+    breakdown: "診断10分・頭浸浴5分・炭酸泉＆水素洗髪&森スパ30分・LLLT5分"
   },
   premium: {
-    name: "ララピール付きプレミアム",
+    name: "森の深眠90分コース extra",
     price: "詳細を見る",
-    desc: "韓国発の次世代ピーリング「ララピール」とヘッドスパを組み合わせた、頭皮と肌のトータルエイジングケア。",
-    reasons: ["頭皮と肌の同時ケア", "低刺激で敏感肌でも安心", "最高の贅沢体験"],
-    imgKey: "result_premium",
-    isVideo: true
+    desc: "「森の深眠」に韓国発の次世代ピーリング「ララピール」をプラス。頭皮と肌のトータルエイジングケアを実現する最高級プラン。",
+    reasons: ["頭皮と肌の同時ケア", "低刺激ララピールで水光肌へ", "最高の贅沢体験"],
+    breakdown: "（森の深眠90分コースのメニューに）＋ララピール"
   },
   balance: {
-    name: "森の深眠コース 60分",
+    name: "森の深眠60分コース",
     price: "詳細を見る",
-    desc: "初めての方におすすめ。短時間でも十分な癒しと効果を実感できるスタンダードコース。",
+    desc: "初めての方におすすめ。短時間でも「深眠」のエッセンスを凝縮し、十分な癒しと効果を実感できるエントリーコース。",
     reasons: ["手軽に極上体験", "お仕事帰りにも最適", "コストパフォーマンス抜群"],
-    imgKey: "result_balance"
+    breakdown: "診断10分・頭浸浴5分・水素洗髪&森スパ25分・LLLT5分"
   }
 };
 
@@ -537,25 +530,26 @@ const Diagnosis = () => {
           <div className="result-header">
             <span className="result-label">あなたにおすすめのコース</span>
             <h3 className="result-name">{result.name}</h3>
-            {/* Price removed from diagnosis result as it varies, linking to coupon instead */}
             <a href="https://beauty.hotpepper.jp/slnH000771707/coupon/" target="_blank" rel="noreferrer" className="result-price" style={{display:'block', textDecoration:'underline', cursor:'pointer', color: 'var(--primary)'}}>
                 お得な価格はこちらで
             </a>
           </div>
-          {result.isVideo ? (
-            <video 
-              src={resolveGoogleDriveUrl(IMAGES[result.imgKey], 'video')} 
-              className="result-img"
-              autoPlay 
-              muted 
-              loop 
-              playsInline 
-              controls
-              style={{ objectFit: 'cover' }}
-            />
-          ) : (
-            <img src={resolveGoogleDriveUrl(IMAGES[result.imgKey])} alt={result.name} className="result-img" />
-          )}
+
+          <div className="result-flow-box">
+             <div className="flow-title"><i className="fa-solid fa-list-check"></i> 施術の流れ</div>
+             <div className="flow-steps">
+               {result.breakdown.split('・').map((step, i) => (
+                 <React.Fragment key={i}>
+                   <div className="flow-step">
+                      <span className="step-count">{i + 1}</span>
+                      <span className="step-text">{step}</span>
+                   </div>
+                   {i < result.breakdown.split('・').length - 1 && <div className="flow-arrow"><i className="fa-solid fa-angle-right"></i></div>}
+                 </React.Fragment>
+               ))}
+             </div>
+          </div>
+
           <div className="result-reasons">
             <h4>おすすめの理由</h4>
             <ul>
@@ -1002,7 +996,20 @@ const App = () => {
         .result-label { background: var(--accent); color: var(--white); padding: 5px 15px; border-radius: 20px; font-size: 0.9rem; display: inline-block; margin-bottom: 10px; }
         .result-name { font-size: 2rem; color: var(--primary); font-family: var(--font-serif); margin-bottom: 5px; line-height: 1.3; }
         .result-price { font-size: 1.5rem; font-weight: bold; margin-bottom: 20px; }
-        .result-img { width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 20px; border: 1px solid #eee; }
+
+        /* Flow Box (Replaces Image) */
+        .result-flow-box {
+           background: #fdfdfd; border: 1px solid #e0e0e0;
+           border-radius: 15px; padding: 25px; margin-bottom: 25px;
+           text-align: left;
+        }
+        .flow-title { font-weight: bold; color: var(--primary); margin-bottom: 15px; font-size: 1.1rem; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .flow-steps { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+        .flow-step { display: flex; align-items: center; background: #fff; border: 1px solid #eee; padding: 8px 12px; border-radius: 30px; box-shadow: 0 2px 5px rgba(0,0,0,0.03); }
+        .step-count { background: var(--secondary); color: var(--primary); width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: bold; margin-right: 8px; }
+        .step-text { font-size: 0.9rem; color: #444; }
+        .flow-arrow { color: #ccc; font-size: 0.8rem; }
+
         .result-reasons { background: #f9f9f9; padding: 20px; border-radius: 10px; text-align: left; margin-bottom: 20px; }
         .result-reasons h4 { color: var(--primary); border-bottom: 1px dashed #ddd; padding-bottom: 5px; margin-bottom: 10px; font-size: 1.1rem; }
         .result-reasons ul { padding-left: 20px; }
